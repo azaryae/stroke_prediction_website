@@ -1,0 +1,51 @@
+<!-- templates/pages/confusion_matrix.html -->
+{% extends 'layoutes/master.html' %}
+
+{% block title %}Confusion Matrix - My Website{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2>Confusion Matrix</h2>
+    <div class="row">
+        <div class="col-md-6">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Predicted Negative</th>
+                        <th>Predicted Positive</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th>Actual Negative</th>
+                        <td>{{ confusion_matrix[0][0] }}</td>
+                        <td>{{ confusion_matrix[0][1] }}</td>
+                    </tr>
+                    <tr>
+                        <th>Actual Positive</th>
+                        <td>{{ confusion_matrix[1][0] }}</td>
+                        <td>{{ confusion_matrix[1][1] }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <h2>Evaluation Metrics</h2>
+    <div class="row">
+        <div class="col-md-6">
+            <ul class="list-group">
+                <li class="list-group-item">Accuracy: {{ accuracy }}</li>
+                <li class="list-group-item">Precision: {{ precision }}</li>
+                <li class="list-group-item">Recall: {{ recall }}</li>
+                <li class="list-group-item">F1-score: {{ f1 }}</li>
+            </ul>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <a href="{{ url_for('predict') }}" class="btn btn-primary">Go to Prediction</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends 'layoutes/master.html' %}
+
+{% block title %}Upload Success - My Website{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="alert alert-success mt-5" role="alert">
+        Data berhasil dimasukkan.
+    </div>
+    <form class="mt-3" method="POST" action="{{ url_for('create_model') }}">
+        <button type="submit" class="btn btn-primary mt-3">Create a Model with Naive Bayes</button>
+    </form>
+</div>
+{% endblock %}
