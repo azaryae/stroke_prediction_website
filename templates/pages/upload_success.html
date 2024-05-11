@@ -4,11 +4,11 @@
 
 {% block content %}
 <div class="container">
-    <div class="alert alert-success mt-5" role="alert">
-        Data berhasil dimasukkan.
+    <div class="alert alert-success mt-5" role="alert" style="font-family: sans-serif; font-weight: 500;">
+        Data entered successfully
     </div>
     <form class="mt-3" method="POST" action="{{ url_for('create_model') }}">
-        <button type="submit" class="btn btn-primary mt-3">Create a Model with Naive Bayes</button>
+        <button type="submit" class="btn btn-light mt-3" style="font-family: sans-serif; font-weight: 500;">Create a Model with Naive Bayes</button>
     </form>
 </div>
 {% endblock %}
