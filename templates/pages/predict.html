@@ -9,7 +9,7 @@
 <div class="container mt-3">
     <div class="row text-center">
         <div class="col">
-            <h2 class="text-light">Predict using Naive Bayes Algorithm</h2>
+            <h2 class="text-dark">Predict using Naive Bayes Algorithm</h2>
         </div>
     </div>
 </div>
@@ -17,31 +17,31 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-6">
-            <div class="card">
+            <div class="card mb-5">
                 <form class="m-3" action="{{ url_for('predict') }}" method="POST">
                     
-                    <label for="gender">Gender</label>
+                    <label for="gender" style="font-weight: 500;">Gender</label>
                     <select class="form-select mb-3" id="gender" name="gender">
                         <option value="Male">Male</option>
                         <option value="Female">Female</option>
                     </select>
                     
-                    <label  for="age">Age</label>
+                    <label  for="age" style="font-weight: 500;">Age</label>
                     <input class="form-control mb-3" type="number" id="age" name="age" required>
                     
-                    <label for="hypertension">Hypertension (0 for No, 1 for Yes)</label>
+                    <label for="hypertension" style="font-weight: 500;">Hypertension (0 for No, 1 for Yes)</label>
                     <input class="form-control mb-3" type="number" id="hypertension" name="hypertension" min="0" max="1" required>
                     
-                    <label for="heart_disease">Heart Disease (0 for No, 1 for Yes)</label>
+                    <label for="heart_disease" style="font-weight: 500;">Heart Disease (0 for No, 1 for Yes)</label>
                     <input class="form-control mb-3" type="number" id="heart_disease" name="heart_disease" min="0" max="1" required>
                     
-                    <label for="ever_married">Ever Married</label>
+                    <label for="ever_married" style="font-weight: 500;">Ever Married</label>
                     <select class="form-select mb-3" id="ever_married" name="ever_married">
                         <option value="Yes">Yes</option>
                         <option value="No">No</option>
                     </select>
                     
-                    <label for="work_type">Work Type</label>
+                    <label for="work_type" style="font-weight: 500;">Work Type</label>
                     <select class="form-select mb-3" id="work_type" name="work_type">
                         <option value="Private">Private</option>
                         <option value="Self-employed">Self-employed</option>
@@ -50,19 +50,19 @@
                         <option value="Never_worked ">Never_worked</option>
                     </select>
                     
-                    <label for="residence_type">Residence Type</label>
+                    <label for="residence_type" style="font-weight: 500;">Residence Type</label>
                     <select class="form-select mb-3" id="residence_type" name="residence_type">
                         <option value="Urban">Urban</option>
                         <option value="Rural">Rural</option>
                     </select>
                     
-                    <label for="avg_glucose_level">Average Glucose Level</label>
+                    <label for="avg_glucose_level" style="font-weight: 500;">Average Glucose Level</label>
                     <input class="form-control mb-3" type="number" id="avg_glucose_level" name="avg_glucose_level" step="0.01" required>
                     
-                    <label for="bmi">BMI</label>
+                    <label for="bmi" style="font-weight: 500;">BMI</label>
                     <input class="form-control mb-3" type="number" id="bmi" name="bmi" step="0.01" required>
                     
-                    <label for="smoking_status">Smoking Status</label>
+                    <label for="smoking_status" style="font-weight: 500;">Smoking Status</label>
                     <select class="form-select mb-3" id="smoking_status" name="smoking_status">
                         <option value="never smoked">never smoked</option>
                         <option value="Unknown">Unknown</option>
@@ -70,7 +70,7 @@
                         <option value="smokes">smokes</option>
                     </select>
                     
-                    <button class="btn btn-primary mt-3" type="submit">Predict</button>
+                    <button class="btn btn-outline-dark fw-bolder mt-3" type="submit" style="width: 30%;">Predict</button>
                 </form>
             </div>
         </div>
