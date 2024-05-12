@@ -4,13 +4,13 @@
 {% block title %}Confusion Matrix - My Website{% endblock %}
 
 {% block content %}
-<div class="container">
-    <h2>Confusion Matrix</h2>
+<div class="container" style="background-color: #ffffff; border: 1px solid #dddddd; border-radius: 5px; padding: 20px; margin-top: 20px;">
+    <h2 style="color: #4285F4; text-align: center; margin-bottom: 30px;">Confusion Matrix</h2>
     <div class="row">
         <div class="col-md-6">
             <table class="table table-bordered">
                 <thead>
-                    <tr>
+                    <tr style="background-color: #4285F4; color: #ffffff;">
                         <th></th>
                         <th>Predicted Negative</th>
                         <th>Predicted Positive</th>
@@ -18,12 +18,12 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <th>Actual Negative</th>
+                        <th style="background-color: #4285F4; color: #ffffff;">Actual Negative</th>
                         <td>{{ confusion_matrix[0][0] }}</td>
                         <td>{{ confusion_matrix[0][1] }}</td>
                     </tr>
                     <tr>
-                        <th>Actual Positive</th>
+                        <th style="background-color: #4285F4; color: #ffffff;">Actual Positive</th>
                         <td>{{ confusion_matrix[1][0] }}</td>
                         <td>{{ confusion_matrix[1][1] }}</td>
                     </tr>
@@ -31,10 +31,10 @@
             </table>
         </div>
     </div>
-    <h2>Evaluation Metrics</h2>
+    <h2 style="color: #4285F4; text-align: center; margin-top: 50px;">Evaluation Metrics</h2>
     <div class="row">
         <div class="col-md-6">
-            <ul class="list-group">
+            <ul class="list-group" style="margin-top: 20px;">
                 <li class="list-group-item">Accuracy: {{ accuracy }}</li>
                 <li class="list-group-item">Precision: {{ precision }}</li>
                 <li class="list-group-item">Recall: {{ recall }}</li>
@@ -42,9 +42,9 @@
             </ul>
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-6">
-            <a href="{{ url_for('predict') }}" class="btn btn-primary">Go to Prediction</a>
+    <div class="row" style="margin-top: 50px;">
+        <div class="col-md-6 d-flex justify-content-center">
+            <a href="{{ url_for('predict') }}" class="btn btn-primary" style="background-color: #4285F4; border-color: #4285F4; margin: 0 auto;">Go to Prediction</a>
         </div>
     </div>
 </div>
