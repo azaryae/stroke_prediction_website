@@ -14,6 +14,32 @@ import json
 
 app = Flask(__name__)
 
+@app.route('/')
+def home():
+    return render_template('pages/index.html')
+
+@app.route('/upload', methods=['GET', 'POST'])
+def upload():
+    if request.method == 'POST':
+        file = request.files['file']
+        if file.filename == '':
+            flash('No selected file')
+            return redirect(request.url)
+        # Set the filename to 'dataset.csv'
+        filename = 'dataset.csv'
+        file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+        file.save(file_path)
+        flash('File uploaded successfully')
+        
+        return redirect(url_for('upload_success'))
+    
+    return render_template('pages/upload.html')
+
+
+@app.route('/upload_success')
+def upload_success():
+    return render_template('pages/upload_success.html')
+
 # Set the secret key for session management and secure cookies
 app.secret_key = 'your_secret_key_here'
 
@@ -68,41 +94,6 @@ def save_model(model):
     model_path = os.path.join(app.config['MODEL_FOLDER'], 'model.pkl')
     joblib.dump(model, model_path)
 
-def load_model():
-    # Load the saved model
-    model_path = os.path.join(app.config['MODEL_FOLDER'], 'model.pkl')
-    model = joblib.load(model_path)
-    return model
-
-@app.route('/')
-def home():
-    return render_template('pages/index.html')
-
-@app.route('/upload', methods=['GET', 'POST'])
-def upload():
-    if request.method == 'POST':
-        file = request.files['file']
-        if file.filename == '':
-            flash('No selected file')
-            return redirect(request.url)
-        # Set the filename to 'dataset.csv'
-        filename = 'dataset.csv'
-        file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-        file.save(file_path)
-        flash('File uploaded successfully')
-        
-        return redirect(url_for('upload_success'))
-    
-    return render_template('pages/upload.html')
-
-
-@app.route('/upload_success')
-def upload_success():
-    return render_template('pages/upload_success.html')
-
-
-
-import json
 
 @app.route('/create_model', methods=['POST'])
 def create_model():
@@ -139,9 +130,11 @@ def create_model():
     # Redirect to the upload success page
     return redirect(url_for('confusion_matriks'))
 
-
-
-import json
+def load_model():
+    # Load the saved model
+    model_path = os.path.join(app.config['MODEL_FOLDER'], 'model.pkl')
+    model = joblib.load(model_path)
+    return model
 
 @app.route('/confusion_matrix')
 def confusion_matriks():
@@ -172,14 +165,6 @@ def confusion_matriks():
 
     # Render template with confusion matrix and metrics
     return render_template('pages/confusion_matrix.html', confusion_matrix=cm, accuracy=accuracy, precision=precision, recall=recall, f1=f1)
-
-
-
-
-
-
-
-
 
 
 
