@@ -7,7 +7,7 @@
 <div class="container" style="background-color: #ffffff; border: 1px solid #dddddd; border-radius: 5px; padding: 20px; margin-top: 20px;">
     <h2 style="color: #4285F4; text-align: center; margin-bottom: 30px;">Confusion Matrix</h2>
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-6 mx-auto">
             <table class="table table-bordered">
                 <thead>
                     <tr style="background-color: #4285F4; color: #ffffff;">
@@ -33,7 +33,7 @@
     </div>
     <h2 style="color: #4285F4; text-align: center; margin-top: 50px;">Evaluation Metrics</h2>
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-6 mx-auto">
             <ul class="list-group" style="margin-top: 20px;">
                 <li class="list-group-item">Accuracy: {{ accuracy }}</li>
                 <li class="list-group-item">Precision: {{ precision }}</li>
@@ -43,20 +43,18 @@
         </div>
     </div>
 
-<!-- tampilkan gambar dari decision tree 
- class_names = [str(label) for label in y_train.unique()]
-    plt.figure(figsize=(20, 10))
-    plot_tree(model.named_steps['classifier'], filled=True, feature_names=X_train.columns, class_names=class_names)
-    plt.savefig('static/images/decision_tree.png')-->
+    <!-- Display decision tree image -->
     <h2 style="color: #4285F4; text-align: center; margin-top: 50px;">Decision Tree</h2>
     <div class="row" style="margin-top: 50px;">
-        <div class="col-md-6 d-flex justify-content-center">
-            <img src="{{ url_for('static', filename='images/decision_tree.png') }}" alt="Decision Tree" style="width: 100%;">
+        <div class="col-md-8 mx-auto d-flex justify-content-center">
+            <img src="{{ url_for('static', filename='images/decision_tree.png') }}" alt="Decision Tree" style="width: 100%; max-width: 800px;">
         </div>
-    
+    </div>
+
+    <!-- Center the "Go to Prediction" button -->
     <div class="row" style="margin-top: 50px;">
-        <div class="col-md-6 d-flex justify-content-center">
-            <a href="{{ url_for('predict') }}" class="btn btn-primary" style="background-color: #4285F4; border-color: #4285F4; margin: 0 auto;">Go to Prediction</a>
+        <div class="col-md-6 mx-auto d-flex justify-content-center">
+            <a href="{{ url_for('predict') }}" class="btn btn-primary" style="background-color: #4285F4; border-color: #4285F4;">Go to Prediction</a>
         </div>
     </div>
 </div>
