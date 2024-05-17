@@ -48,7 +48,7 @@
     plt.figure(figsize=(20, 10))
     plot_tree(model.named_steps['classifier'], filled=True, feature_names=X_train.columns, class_names=class_names)
     plt.savefig('static/images/decision_tree.png')-->
-
+    <h2 style="color: #4285F4; text-align: center; margin-top: 50px;">Decision Tree</h2>
     <div class="row" style="margin-top: 50px;">
         <div class="col-md-6 d-flex justify-content-center">
             <img src="{{ url_for('static', filename='images/decision_tree.png') }}" alt="Decision Tree" style="width: 100%;">
