@@ -31,7 +31,7 @@
                             <div class="col-sm-6"></div>
                             <div class="col-sm-6">
                                 <button type="submit" class="btn btn-primary btn-block mt-4" id="uploadBtn" style="display: none;">Upload</button>
-                                <button type="button" class="btn btn-success btn-block mt-4" id="downloadBtn" style="display: none;">Download</button>
+                                <button type="button" class="btn btn-success btn-block mt-4" id="downloadBtn">Download</button>
                             </div>
                         </div>
                     </form>
@@ -52,34 +52,14 @@
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Soft shadow */
     }
 
-    .btn-primary {
-        background-color: #ff6b6b; /* Vivid red */
-        border-color: #ff6b6b; /* Matching border color */
+    .btn-primary, .btn-success, .btn-danger {
+        background-color: #007bff; /* Blue */
+        border-color: #007bff; /* Matching border color */
     }
 
-    .btn-primary:hover {
-        background-color: #ff4d4d; /* Darker red on hover */
-        border-color: #ff4d4d;
-    }
-
-    .btn-success {
-        background-color: #28a745; /* Dark green */
-        border-color: #28a745;
-    }
-
-    .btn-success:hover {
-        background-color: #218838; /* Darker green on hover */
-        border-color: #218838;
-    }
-
-    .btn-danger {
-        background-color: #dc3545; /* Dark red */
-        border-color: #dc3545;
-    }
-
-    .btn-danger:hover {
-        background-color: #c82333; /* Darker red on hover */
-        border-color: #c82333;
+    .btn-primary:hover, .btn-success:hover, .btn-danger:hover {
+        background-color: #000; /* Black on hover */
+        border-color: #000;
     }
 </style>
 
@@ -90,21 +70,18 @@
         const clearBtnWrapper = document.getElementById("clearBtnWrapper");
         const fileNameSpan = document.getElementById("fileName");
         const uploadBtn = document.getElementById("uploadBtn");
-        const downloadBtn = document.getElementById("downloadBtn");
+
         if (fileName) {
             clearBtnWrapper.style.display = "inline-block";
             fileNameSpan.innerText = fileName;
             fileNameSpan.style.display = "inline-block";
             uploadBtn.style.display = "inline-block";
-            downloadBtn.style.display = "inline-block"; // Show the download button
-            downloadBtn.setAttribute("href", "#"); // Set href attribute to '#' temporarily
             input.style.display = "none";
         } else {
             clearBtnWrapper.style.display = "none";
             fileNameSpan.innerText = "None";
             fileNameSpan.style.display = "inline-block";
             uploadBtn.style.display = "none";
-            downloadBtn.style.display = "none"; // Hide the download button
             input.style.display = "inline-block";
         }
     }
@@ -115,31 +92,30 @@
         const clearBtnWrapper = document.getElementById("clearBtnWrapper");
         const fileNameSpan = document.getElementById("fileName");
         const uploadBtn = document.getElementById("uploadBtn");
-        const downloadBtn = document.getElementById("downloadBtn");
+
         clearBtnWrapper.style.display = "none"; // Hide the clear button
         fileNameSpan.innerText = "None";
         fileNameSpan.style.display = "inline-block";
         uploadBtn.style.display = "none";
-        downloadBtn.style.display = "none"; // Hide the download button
         fileInput.style.display = "inline-block"; // Show the file input button again
     }
 
     function downloadDataset() {
         const fileInput = document.getElementById("file");
         const file = fileInput.files[0];
-        const fileName = file.name;
+        const fileName = file ? file.name : "sample_dataset.csv"; // Default file name
 
-        if (file) {
-            const blob = new Blob([file], { type: file.type });
-            const url = window.URL.createObjectURL(blob);
-            const a = document.createElement("a");
-            a.href = url;
-            a.download = fileName;
-            document.body.appendChild(a);
-            a.click();
-            window.URL.revokeObjectURL(url);
-            document.body.removeChild(a);
-        }
+        // Create a dummy dataset for download
+        const dummyData = "id,name,value\n1,Item1,10\n2,Item2,20\n3,Item3,30";
+        const blob = new Blob([dummyData], { type: "text/csv" });
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = fileName;
+        document.body.appendChild(a);
+        a.click();
+        window.URL.revokeObjectURL(url);
+        document.body.removeChild(a);
     }
 
     // Function to handle download button click
