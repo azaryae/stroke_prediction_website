@@ -1,7 +1,7 @@
-from flask import Flask, render_template, request, flash, redirect, url_for
 import os
+from flask import Flask, render_template, request, flash, redirect, url_for
 import pandas as pd
-from sklearn.naive_bayes import GaussianNB
+from sklearn.tree import DecisionTreeClassifier, plot_tree
 import joblib
 from sklearn.impute import SimpleImputer
 from sklearn.compose import ColumnTransformer
@@ -9,8 +9,8 @@ from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import OneHotEncoder
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import confusion_matrix, accuracy_score, precision_score, recall_score, f1_score
-from flask import render_template
 import json
+import matplotlib.pyplot as plt
 
 app = Flask(__name__)
 
@@ -79,14 +79,25 @@ def train_model(X_train, y_train):
             ('cat', categorical_transformer, categorical_features)
         ])
     
-    # Append Gaussian Naive Bayes classifier to preprocessing pipeline
+    # Append DecisionTreeClassifier to preprocessing pipeline with max_depth=10
     model = Pipeline(steps=[('preprocessor', preprocessor),
-                            ('classifier', GaussianNB())])
+                            ('classifier', DecisionTreeClassifier())])
     
     # Fit the model
     model.fit(X_train, y_train)
+
+    # Get feature names after one-hot encoding for categorical features
+    categorical_encoder = model.named_steps['preprocessor'].named_transformers_['cat'].named_steps['onehot']
+    feature_names = numeric_features + list(categorical_encoder.get_feature_names_out(categorical_features))
+    
+    # Save the decision tree plot
+    plt.figure(figsize=(20, 10))
+    plot_tree(model.named_steps['classifier'], filled=True, feature_names=feature_names, class_names=['0', '1'])
+    plt.savefig('static/images/decision_tree.png')
     
     return model
+
+
 
 
 def save_model(model):
@@ -125,10 +136,8 @@ def create_model():
     with open('y_test.json', 'w') as file:
         json.dump(y_test_json, file)
 
-    flash('Model created successfully')
-
     # Redirect to the upload success page
-    return redirect(url_for('confusion_matriks'))
+    return redirect(url_for('confusion_matriks')) 
 
 def load_model():
     # Load the saved model

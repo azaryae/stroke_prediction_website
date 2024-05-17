@@ -42,6 +42,18 @@
             </ul>
         </div>
     </div>
+
+<!-- tampilkan gambar dari decision tree 
+ class_names = [str(label) for label in y_train.unique()]
+    plt.figure(figsize=(20, 10))
+    plot_tree(model.named_steps['classifier'], filled=True, feature_names=X_train.columns, class_names=class_names)
+    plt.savefig('static/images/decision_tree.png')-->
+
+    <div class="row" style="margin-top: 50px;">
+        <div class="col-md-6 d-flex justify-content-center">
+            <img src="{{ url_for('static', filename='images/decision_tree.png') }}" alt="Decision Tree" style="width: 100%;">
+        </div>
+    
     <div class="row" style="margin-top: 50px;">
         <div class="col-md-6 d-flex justify-content-center">
             <a href="{{ url_for('predict') }}" class="btn btn-primary" style="background-color: #4285F4; border-color: #4285F4; margin: 0 auto;">Go to Prediction</a>
